@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <% if session[:user] %>
+    <%= "Hello, #{session[:user].name}" %>
+  <% end%>
+</p>
+
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+<b>Favorite Books: </b> 
+  <br>
+  <table class="table table-hover table-bordered">
+        <% @user.favorites.each do |favorite| %>
+          <tr>
+            <td><%= link_to favorite.book.title, favorite.book %></td> 
+        <% if @user.favorites && session[:user_id]==@user.id%>
+            <td><%= button_to 'Delete Favorite', { :action => :destroy, :controller => "favorites", 
+                                                   :book_id => favorite.book.id, :user_id => session[:user_id] }, :method => :delete %></td> 
+          </tr>
+        <% end %>
+      <% end %>
+  </table> 
+</p>
+
+
+<% if session[:user_id] == @user.id%>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure you want to delete your profile?' } %>
+<% end %>

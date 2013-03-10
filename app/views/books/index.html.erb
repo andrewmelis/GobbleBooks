@@ -1,0 +1,34 @@
+<h1>Listing books</h1>
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%= link_to 'New Book', new_book_path %>
+
+<% @books.each do |book| %>
+  <tr>
+    <td><%= link_to book.title, book %></td>
+    <td><%= link_to book.author.name, book.author %></td>
+    <% if session[:user_id] %>
+      <% if !Favorite.where(:book_id=>book.id, :user_id=>session[:user_id]).any? %>
+        <td><%= button_to 'Add Favorite', { :action => "create", :controller => "favorites", :book_id => book.id, :user_id => session[:user_id] } %></td> 
+      <% else %> 
+        <td>Already Favorite!</td>
+        <% end %>
+    <% else %>
+      <td>Log In!</td>
+    <% end %>
+    <td><%= link_to 'Edit', edit_book_path(book) %></td>
+    <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

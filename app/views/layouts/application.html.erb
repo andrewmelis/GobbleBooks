@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pathfinder</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- <header> -->
+        <div class="navbar">
+          <div class "navbar-inner">
+            <a class="brand" href="<%root_url%>">Book Share</a>
+            <ul class="nav">  
+              <li class="divider-vertical"></li>
+              <% if @current_user.blank? %>
+                <li><%= link_to "Sign Up", new_user_url%></li>
+                <li class="divider-vertical"></li>
+                <li><%= link_to "Sign In", login_url %></li>
+              <% else %>
+                <li><%= link_to "#{@current_user.name}'s Profile", user_url(@current_user) %></li>
+                <li class="divider-vertical"></li>
+                <li><%= link_to 'Log Out', logout_url %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <!-- </header> -->
+    </div>
+
+
+    <div class="container">
+      <hr>
+
+      <%= yield %>
+
+      <hr>
+    </div>
+
+    <div class="container">
+      <footer>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <ul class="nav">
+              <li><%= link_to "Users", users_url %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Books", books_url %></li> 
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Authors", authors_url %> </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
