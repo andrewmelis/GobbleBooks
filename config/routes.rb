@@ -1,13 +1,20 @@
 Pathfinder::Application.routes.draw do 
   
+
+
   root :to => "users#index"
 
   resources :authors
 
-  resources :books
+  resources :books do
+    resources :comments, :only => [:create, :destroy]
+  end
 
   resources :users
  
+  #post '/comments' => 'comments#create'
+  #delete '/comments' => 'comments#destroy'
+  
   #login/logout/signup behavior
   get "/login" => "sessions#new", :as => :login
   get "/logout" => "sessions#destroy", :as => :logout

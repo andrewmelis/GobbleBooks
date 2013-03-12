@@ -4,8 +4,8 @@
 <table class="table table-hover table-bordered">
   <tr>
     <th>Name</th>
-    <th></th>
-    <th></th>
+    <th>Last Commented Book</th>
+    <th>Last Comment</th>
     <th></th>
   </tr>
 
@@ -13,6 +13,13 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= link_to user.name, user %></td>
+    <% if user.comments.any? %>
+      <td><%= link_to "#{user.comments.last.book.title}" , user.comments.last.book%></td>
+      <td><%= user.comments.last.body[0..19]+"..." %></td>
+    <%else %>
+      <td>no comments</td>
+      <td>no comments</td>
+    <% end %>
   </tr>
 <% end %>
 </table>
