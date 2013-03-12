@@ -15,6 +15,8 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
 
+    @comment = Comment.new
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }
