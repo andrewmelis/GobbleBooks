@@ -10,28 +10,25 @@
     <%= link_to @book.author.name, @book.author %>
 </p>
 
+<br> 
+
 <p>
-<h3> Comments </h3>
+<h4> Discussion </h4>
 
 <% @book.comments.each do |comment|%>
-  <b><%= comment.user.name %></b><br>
+  <b><%= comment.user.name %></b> wrote at <%= comment.created_at.to_formatted_s(:long) %><br>
   <%= comment.body %>
+  <br>
 <% end %>
+</p>
 
 <br>
 
-
-
-
-<% form_for(@comment) do |f| %>
-  <p>
-
-  <%= f.label :body, "Comment Body" %><br   />
-  <%= f.text_field :body %>
-  </p>
-
-  <p>
-  <%= f.submit "Share my ideas!" %>
-  </p>
-<% end %>
+<p>
+	<%=link_to "Click here to add to the discussion", new_book_comment_url(@book.id) %>	
 </p>
+
+
+
+
+
