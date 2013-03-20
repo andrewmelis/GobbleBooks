@@ -3,9 +3,7 @@
 <table class="table table-bordered table-hover">
   <tr>
     <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    
   </tr>
 
 <%= link_to 'Click Here to Add a New Author', new_author_path %>
@@ -13,8 +11,7 @@
 <% @authors.each do |author| %>
   <tr>
     <td><%= link_to author.name, author %></td>
-    <td><%= link_to 'Edit', edit_author_path(author) %></td>
-    <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    
   </tr>
 <% end %>
 </table>

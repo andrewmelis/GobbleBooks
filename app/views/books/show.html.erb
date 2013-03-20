@@ -25,7 +25,9 @@
 <br>
 
 <p>
-	<%=link_to "Click here to add to the discussion", new_book_comment_url(@book.id) %>	
+	<% if session[:user_id] %>
+		<%=link_to "Click here to add to the discussion", new_book_comment_url(@book.id) %>	
+	<% end %>
 </p>
 
 
