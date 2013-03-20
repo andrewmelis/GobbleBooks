@@ -48,6 +48,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id #used for log in behavior
+
+        #invoke action mailer
+        Notifier.notify_email(@user).deliver 
+
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else

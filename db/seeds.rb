@@ -33,6 +33,12 @@ books.each do |book|
 	Book.create :title => book, :author_id => rand(8)+1
 end
 
+User.all.each do |user|
+	2.times do
+		Favorite.create :book_id => rand(8)+1, :user_id => user.id
+	end
+end
+
  10.times do 
  	comments.each do |comment|
  		Comment.create :book_id => rand(8)+1, :user_id => rand(8)+1, :body => comment
